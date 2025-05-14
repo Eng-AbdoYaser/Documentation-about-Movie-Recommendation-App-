@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Routes, Route, useLocation } from "react-router-dom";
 import Register from "./components/pages/Register.jsx";
 import Login from "./components/pages/Login.jsx";
@@ -28,21 +28,20 @@ function App() {
   // Check if current route is auth page
   const isAuthPage = ['/', '/register'].includes(location.pathname);
 
-  // Unified data handler
-  const handleDataReady = (data) => {
-    if (data.genre) { // Genre-specific data
+  const handleDataReady =(data) => {
+    if (data.genre) { 
       setGenreData(prev => ({
         ...prev,
         [data.genre]: data
       }));
-    } else { // All movies data
+    } else { 
       setAllMovies(data);
     }
-  };
+  }
+  // useCallback is used to memoize the function to prevent unnecessary re-renders
 
   return (
     <div>
-      {/* Data fetchers - always active */}
       <ActionFetcher onDataReady={handleDataReady} />
       <AdventureFetcher onDataReady={handleDataReady} />
       <AnimationFetcher onDataReady={handleDataReady} />

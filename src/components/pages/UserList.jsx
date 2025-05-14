@@ -5,7 +5,6 @@ import '../MyStyles/UserList.css'
 function UserList() {
   const [myList, setMyList] = useState([]);
 
-  // Load My List from localStorage on mount
   useEffect(() => {
     const savedList = localStorage.getItem('myList');
     if (savedList) {
@@ -13,7 +12,6 @@ function UserList() {
     }
   }, []);
 
-  // Remove item from My List
   const removeFromList = (itemId) => {
     const updatedList = myList.filter(item => item.id !== itemId);
     setMyList(updatedList);

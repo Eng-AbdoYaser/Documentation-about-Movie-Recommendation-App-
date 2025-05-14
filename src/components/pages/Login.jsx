@@ -21,7 +21,6 @@ function Login() {
       return;
     }
 
-    // Successful login
     localStorage.setItem('currentUser', JSON.stringify(user));
     navigate('/home');
   };

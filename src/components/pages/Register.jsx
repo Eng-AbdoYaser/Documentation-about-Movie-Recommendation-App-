@@ -26,7 +26,6 @@ function Register() {
       return;
     }
 
-    // Save new user
     const newUser = {
       name: formData.name,
       email: formData.email,

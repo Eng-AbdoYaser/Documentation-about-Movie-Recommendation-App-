@@ -6,18 +6,15 @@ function Movies({ movies }) {
   const [trailerUrl, setTrailerUrl] = useState('');
   const apiKey = '12750e83790c14a1a9c1acd50ff6bf8a';
 
-  // My List state initialization
   const [myList, setMyList] = useState(() => {
     const savedList = localStorage.getItem('myList');
     return savedList ? JSON.parse(savedList) : [];
   });
 
-  // Save My List to localStorage
   useEffect(() => {
     localStorage.setItem('myList', JSON.stringify(myList));
   }, [myList]);
 
-  // My List functions
   const toggleMyList = (item) => {
     const isInList = myList.some(listItem => listItem.id === item.id);
     if (isInList) {
@@ -33,7 +30,6 @@ function Movies({ movies }) {
     }
   };
 
-  // Set featured movie and trailer
   useEffect(() => {
     if (movies.length > 0 && !featuredItem) {
       const randomItem = movies[Math.floor(Math.random() * movies.length)];
@@ -56,7 +52,6 @@ function Movies({ movies }) {
 
   return (
     <div>
-      {/* Featured Movie Section */}
       {featuredItem && (
         <section className="featured-movie">
           <div className="container-fluid">
@@ -96,7 +91,6 @@ function Movies({ movies }) {
         </section>
       )}
 
-      {/* All Movies Grid */}
       <section className="movie-grid py-5">
         <div className="container">
           <h2 className="mb-4 text-white">All Movies</h2>
@@ -154,7 +148,6 @@ function Movies({ movies }) {
   );
 }
 
-// Genre helper function
 function getGenreName(genreId) {
   const genreMap = {
     28: "Action", 

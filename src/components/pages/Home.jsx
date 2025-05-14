@@ -6,24 +6,21 @@ function Home({ genres }) {
   const [trailerUrl, setTrailerUrl] = useState('');
   const apiKey = '12750e83790c14a1a9c1acd50ff6bf8a';
 
-  // My List state initialization
-  const [myList, setMyList] = useState(() => {
-    const savedList = localStorage.getItem('myList');
-    return savedList ? JSON.parse(savedList) : [];
+  const [myList, setMyList] = useState(() => {  // Lazy initialization, only runs once, avoids rerunning the logic on every rerender
+    const savedList = localStorage.getItem('myList'); // reades from local storage the key [myList]
+    return savedList ? JSON.parse(savedList) : []; // parses the string to an array/object, if not found, returns an empty array
   });
 
-  // Save My List to localStorage
   useEffect(() => {
-    localStorage.setItem('myList', JSON.stringify(myList));
-  }, [myList]);
+    localStorage.setItem('myList', JSON.stringify(myList)); // saves the myList to local storage
+  }, [myList]); //Dependency array: re-run when myList changes
 
-  // My List functions
   const toggleMyList = (item) => {
-    const isInList = myList.some(listItem => listItem.id === item.id);
+    const isInList = myList.some(listItem => listItem.id === item.id); // checks if the item is already in the list
     if (isInList) {
-      setMyList(prev => prev.filter(listItem => listItem.id !== item.id));
+      setMyList(prev => prev.filter(listItem => listItem.id !== item.id)); // Removes the existing item from the list
     } else {
-      setMyList(prev => [...prev, {
+      setMyList(prev => [...prev, { // the (...) is a spread operator, it spreads the array into a new array
         id: item.id,
         title: item.title || item.name,
         poster_path: item.poster_path,
@@ -35,18 +32,17 @@ function Home({ genres }) {
     }
   };
 
-  // Set featured item and trailer
-  useEffect(() => {
+  useEffect(() => { // this useEffect sets a random featured item
     const allItems = Object.values(genres).flatMap(g => g.items || []);
     if (allItems.length > 0 && !featuredItem) {
-      const randomItem = allItems[Math.floor(Math.random() * allItems.length)];
+      const randomItem = allItems[Math.floor(Math.random() * allItems.length)]; // gets a random item from the array for the featured item
       setFeaturedItem(randomItem);
       
-      const mediaType = randomItem.media_type || (randomItem.title ? 'movie' : 'tv');
-      fetch(`https://api.themoviedb.org/3/${mediaType}/${randomItem.id}/videos?api_key=${apiKey}`)
+      const mediaType = randomItem.media_type || (randomItem.title ? 'movie' : 'tv'); // checks if the item is a movie or a tv show
+      fetch(`https://api.themoviedb.org/3/${mediaType}/${randomItem.id}/videos?api_key=${apiKey}`) // fetches the videos for the item
         .then(res => res.json())
         .then(data => {
-          const trailer = data.results?.find(v => 
+          const trailer = data.results?.find(v =>  //  Find the Official YouTube Trailer, v is the video
             v.type === 'Trailer' && 
             v.site === 'YouTube' &&
             v.official
@@ -56,14 +52,12 @@ function Home({ genres }) {
     }
   }, [genres]);
 
-  // Sort genres: Popular first
   const sortedGenres = Object.entries(genres).sort(([genreA], [genreB]) => (
     genreA === 'Popular' ? -1 : genreB === 'Popular' ? 1 : 0
   ));
 
   return (
     <div>
-      {/* Featured Section */}
       {featuredItem && (
         <section id="featured-section" className="featured-movie">
           <div className="container-fluid">
@@ -103,7 +97,6 @@ function Home({ genres }) {
         </section>
       )}
 
-      {/* Genre Sections */}
       {sortedGenres.map(([genre, { items }]) => (
         <section key={genre} className="movie-grid py-5">
           <div className="container-fluid movie-app">

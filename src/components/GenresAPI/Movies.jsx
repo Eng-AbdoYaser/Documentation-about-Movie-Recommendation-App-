@@ -5,7 +5,6 @@ function MovieFetcher({ onDataReady }) {
         async function fetchData() {
             try {
                 const apiKey = '12750e83790c14a1a9c1acd50ff6bf8a';
-                // Fetch all movies without genre filter
                 const movieRes = await fetch(
                     `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`
                 );
@@ -16,8 +15,6 @@ function MovieFetcher({ onDataReady }) {
 
                 const movieData = await movieRes.json();
                 
-                // Send the data to parent
-                // In MovieFetcher.jsx
                 onDataReady(movieData.results || []); 
 
             } catch (error) {

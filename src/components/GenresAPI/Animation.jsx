@@ -1,7 +1,6 @@
-// ActionFetcher.jsx
 import { useEffect } from 'react';
 
-function ActionFetcher({ onDataReady }) {
+function AnimationFetcher({ onDataReady }) {
   useEffect(() => {
     async function fetchData() {
       try {
@@ -31,4 +30,4 @@ function ActionFetcher({ onDataReady }) {
   return null;
 }
 
-export default ActionFetcher;
+export default AnimationFetcher;

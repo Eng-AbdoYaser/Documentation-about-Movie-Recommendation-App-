@@ -1,4 +1,3 @@
-// PopularFetcher.jsx
 import { useEffect } from 'react';
 
 function PopularFetcher({ onDataReady }) {
@@ -7,13 +6,11 @@ function PopularFetcher({ onDataReady }) {
       try {
         const apiKey = '12750e83790c14a1a9c1acd50ff6bf8a';
         
-        // Fetch popular movies
         const movieRes = await fetch(
           `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
         );
         const movieData = await movieRes.json();
         
-        // Fetch popular TV shows
         const seriesRes = await fetch(
           `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}`
         );

@@ -10,7 +10,6 @@ const Footer = () => {
     <footer className="footer mt-auto py-5 bg-dark text-light">
       <div className="container">
         <div className="row g-4">
-          {/* About Section */}
           <div className="col-md-6 col-lg-3">
             <h5 className="footer-heading mb-3">CineStream</h5>
             <p className="footer-text">
@@ -19,7 +18,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div className="col-md-6 col-lg-3">
             <h5 className="footer-heading mb-3">Quick Links</h5>
             <ul className="list-unstyled">
@@ -50,7 +48,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal */}
           <div className="col-md-6 col-lg-3">
             <h5 className="footer-heading mb-3">Legal</h5>
             <ul className="list-unstyled">
@@ -72,7 +69,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Social Links */}
           <div className="col-md-6 col-lg-3">
             <h5 className="footer-heading mb-3">Connect With Us</h5>
             <div className="social-links d-flex gap-3">
@@ -92,7 +88,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="footer-copyright text-center mt-5 pt-4 border-top border-secondary">
           <p className="mb-0">
             © {currentYear} CineStream. All rights reserved.<br />

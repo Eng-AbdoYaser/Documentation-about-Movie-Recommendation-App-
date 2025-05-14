@@ -1,7 +1,7 @@
 // ActionFetcher.jsx
 import { useEffect } from 'react';
 
-function ActionFetcher({ onDataReady }) {
+function RomanceFetcher({ onDataReady }) {
   useEffect(() => {
     async function fetchData() {
       try {
@@ -12,9 +12,9 @@ function ActionFetcher({ onDataReady }) {
         );
         const movieData = await movieRes.json();
         
-
+        // there is no series data for Romance genre
         onDataReady({
-          genre: 'Drama',
+          genre: 'Romance',
           items: [...(movieData.results || [])]
         });
       } catch (error) {
@@ -27,4 +27,4 @@ function ActionFetcher({ onDataReady }) {
   return null;
 }
 
-export default ActionFetcher;
+export default RomanceFetcher;

@@ -10,18 +10,15 @@ function DetailsPage() {
   const [trailerUrl, setTrailerUrl] = useState('');
   const apiKey = '12750e83790c14a1a9c1acd50ff6bf8a';
 
-  // My List state initialization
   const [myList, setMyList] = useState(() => {
     const savedList = localStorage.getItem('myList');
     return savedList ? JSON.parse(savedList) : [];
   });
 
-  // Save My List to localStorage
   useEffect(() => {
     localStorage.setItem('myList', JSON.stringify(myList));
   }, [myList]);
 
-  // My List functions
   const toggleMyList = () => {
     if (!details) return;
 
@@ -39,25 +36,21 @@ function DetailsPage() {
     }
   };
 
-  // Fetch data
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch main details
         const detailsResponse = await fetch(
           `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}&language=en-US`
         );
         const detailsData = await detailsResponse.json();
         setDetails(detailsData);
 
-        // Fetch credits
         const creditsResponse = await fetch(
           `https://api.themoviedb.org/3/${mediaType}/${id}/credits?api_key=${apiKey}`
         );
         const creditsData = await creditsResponse.json();
         setCredits(creditsData);
 
-        // Fetch videos
         const videosResponse = await fetch(
           `https://api.themoviedb.org/3/${mediaType}/${id}/videos?api_key=${apiKey}`
         );
@@ -83,7 +76,6 @@ function DetailsPage() {
 
   return (
     <div className="details-page">
-      {/* Hero Section */}
       <section className="details-hero mb-5">
         <div className="container-fluid position-relative">
           <img
@@ -127,7 +119,6 @@ function DetailsPage() {
         </div>
       </section>
 
-      {/* Details Section */}
       <section className="container py-5 text-white">
         <div className="row">
           <div className="col-md-8">

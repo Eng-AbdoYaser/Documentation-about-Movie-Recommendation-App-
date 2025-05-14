@@ -7,12 +7,10 @@ function Trending({ trendingItems }) {
     return savedList ? JSON.parse(savedList) : [];
   });
 
-  // Save My List to localStorage
   useEffect(() => {
     localStorage.setItem('myList', JSON.stringify(myList));
   }, [myList]);
 
-  // My List functions
   const toggleMyList = (item) => {
     const isInList = myList.some(listItem => listItem.id === item.id);
     if (isInList) {
@@ -23,14 +21,13 @@ function Trending({ trendingItems }) {
         title: item.title || item.name,
         poster_path: item.poster_path,
         media_type: item.media_type || (item.title ? 'movie' : 'tv'),
-        genre: 'Popular' // Since we're showing trending/popular items
+        genre: 'Popular'
       }]);
     }
   };
 
   return (
     <div>
-      {/* Trending Grid Section */}
       <section className="movie-grid my-5 py-5">
         <div className="container">
           <h2 className="mb-4 text-white">Trending Now</h2>
